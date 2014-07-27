@@ -2,7 +2,7 @@ yafowil.widget.recaptcha
 ========================
 
 This is the recaptcha widget for `yafowil <http://pypi.python.org/pypi/yafowil>`_,
-based on `Leaflet http://leafletjs.org`_
+based on `reCAPTCHA http://www.google.com/recaptcha/intro/index.html`_
 
 - `Documentation <http://docs.yafowil.info/en/latest/blueprints.html#recaptcha>`_
 
