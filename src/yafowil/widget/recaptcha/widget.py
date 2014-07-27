@@ -1,60 +1,74 @@
 from node.utils import UNSET
-from yafowil.common import generic_required_extractor
-from yafowil.base import (
-    factory,
-    fetch_value,
-)
+from yafowil.common import generic_extractor
+from yafowil.base import factory
 from yafowil.utils import (
-    cssid,
-    cssclasses,
-    css_managed_props,
     managedprops,
     attr_value,
-    data_attrs_helper,
 )
+from yafowil.tsf import TSF
 from recaptcha.client.captcha import (
     displayhtml,
     submit,
 )
 
 
+_ = TSF('yafowil.widget.recaptcha')
+
+
+error_messages = dict()
+error_messages['invalid-site-private-key'] = _(
+    'invalid-site-private-key',
+    default='We weren\'t able to verify the private key.')
+error_messages['invalid-request-cookie'] = _(
+    'invalid-request-cookie',
+    default='The challenge parameter of the verify script was incorrect.')
+error_messages['incorrect-captcha-sol'] = _(
+    'incorrect-captcha-sol',
+    default='The CAPTCHA solution was incorrect.')
+error_messages['captcha-timeout'] = _(
+    'captcha-timeout',
+    default='The solution was received after the CAPTCHA timed out.')
+error_messages['recaptcha-not-reachable'] = _(
+    'recaptcha-not-reachable',
+    default='Unable to contact the reCAPTCHA verify server.')
+
+
 def recaptcha_extractor(widget, data):
-    #info = IRecaptchaInfo(self.request)
-    #if info.verified:
-    #    return True
-    challenge_field = self.request.get('recaptcha_challenge_field')
-    response_field = self.request.get('recaptcha_response_field')
+    challenge_field = data.request.get('recaptcha_challenge_field')
+    response_field = data.request.get('recaptcha_response_field')
     private_key = attr_value('private_key', widget, data)
-    remote_addr = self.request.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]
+    remote_addr = data.request.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]
     if not remote_addr:
-        remote_addr = self.request.get('REMOTE_ADDR')
+        remote_addr = data.request.get('REMOTE_ADDR')
     res = submit(challenge_field,
                  response_field,
                  private_key,
                  remote_addr)
     if not res.is_valid:
-        raise ExtractionError(res.error_code)
-    #info.verified = res.is_valid
+        raise ExtractionError(error_messages[res.error_code])
     return True
 
 
-@managedprops(*['public_key', 'private_key'] + css_managed_props)
+recaptcha_options = """\
+<script type="text/javascript">
+var RecaptchaOptions = {{
+    lang: '{lang}',
+    theme: '{theme}'
+}};
+</script>
+"""
+
+
+@managedprops(*['public_key', 'private_key'])
 def recaptcha_edit_renderer(widget, data):
-    lang = 'en'
-    options = """
-    <script type="text/javascript">
-    var RecaptchaOptions = {
-        lang: '{lang}',
-        theme: '{theme}'
-    };
-    </script>
-    """ % {
+    options = recaptcha_options.format(**{
         'lang': attr_value('lang', widget, data),
         'theme': attr_value('theme', widget, data),
-    }
-    use_ssl = self.request['SERVER_URL'].startswith('https://')
-    #error = IRecaptchaInfo(self.request).error
-    error = data.error
+    })
+    use_ssl = data.request.get('SERVER_URL', '').startswith('https://')
+    error = None
+    if data.errors:
+        error = data.errors[0]
     public_key = attr_value('public_key', widget, data)
     return options + displayhtml(public_key, use_ssl=use_ssl, error=error)
 
@@ -65,7 +79,7 @@ def recaptcha_display_renderer(widget, data):
 
 factory.register(
     'recaptcha',
-    extractors=[recaptcha_extractor, generic_required_extractor],
+    extractors=[recaptcha_extractor, generic_extractor],
     edit_renderers=[recaptcha_edit_renderer],
     display_renderers=[recaptcha_display_renderer])
 
@@ -73,14 +87,6 @@ factory.doc['blueprint']['recaptcha'] = \
 """Add-on blueprint
 `yafowil.widget.recaptcha <http://github.com/bluedynamics/yafowil.widget.recaptcha/>`_
 """
-
-factory.defaults['recaptcha.class'] = 'recaptcha'
-
-factory.defaults['recaptcha.required'] = True
-
-factory.defaults['recaptcha.error_class'] = 'error'
-
-factory.defaults['recaptcha.message_class'] = 'errormessage'
 
 factory.defaults['recaptcha.public_key'] = ''
 factory.doc['props']['recaptcha.public_key'] = """\
