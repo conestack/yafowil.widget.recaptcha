@@ -1,15 +1,17 @@
-from node.utils import UNSET
 from yafowil.common import generic_extractor
-from yafowil.base import factory
+from yafowil.base import (
+    factory,
+    ExtractionError,
+)
 from yafowil.utils import (
+    cssid,
+    cssclasses,
     managedprops,
     attr_value,
+    data_attrs_helper,
 )
 from yafowil.tsf import TSF
-from recaptcha.client.captcha import (
-    displayhtml,
-    submit,
-)
+from recaptcha.client.captcha import submit
 
 
 _ = TSF('yafowil.widget.recaptcha')
@@ -33,48 +35,54 @@ error_messages['recaptcha-not-reachable'] = _(
     default='Unable to contact the reCAPTCHA verify server.')
 
 
+NO_SCRIPT_TEMPLATE = """
+<noscript>
+   <iframe src="http://www.google.com/recaptcha/api/noscript?k={public_key}"
+           height="300"
+           width="500"
+           frameborder="0">
+   </iframe>
+   <br />
+   <textarea name="recaptcha_challenge_field"
+             rows="3"
+             cols="40">
+   </textarea>
+   <input type="hidden"
+          name="recaptcha_response_field"
+          value="manual_challenge" />
+</noscript>
+"""
+
+
 def recaptcha_extractor(widget, data):
-    challenge_field = data.request.get('recaptcha_challenge_field')
-    response_field = data.request.get('recaptcha_response_field')
+    request = data.request
+    challenge_field = request.get('recaptcha_challenge_field')
+    response_field = request.get('recaptcha_response_field')
     private_key = attr_value('private_key', widget, data)
-    remote_addr = data.request.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]
+    remote_addr = request.request.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]
     if not remote_addr:
-        remote_addr = data.request.get('REMOTE_ADDR')
-    res = submit(challenge_field,
-                 response_field,
-                 private_key,
-                 remote_addr)
+        remote_addr = request.request.get('REMOTE_ADDR')
+    res = submit(challenge_field, response_field, private_key, remote_addr)
     if not res.is_valid:
         raise ExtractionError(error_messages[res.error_code])
     return True
 
 
-recaptcha_options = """\
-<script type="text/javascript">
-var RecaptchaOptions = {{
-    lang: '{lang}',
-    theme: '{theme}'
-}};
-</script>
-"""
-
-
-@managedprops(*['public_key', 'private_key'])
+@managedprops('public_key', 'private_key', 'theme', 'lang')
 def recaptcha_edit_renderer(widget, data):
-    options = recaptcha_options.format(**{
-        'lang': attr_value('lang', widget, data),
-        'theme': attr_value('theme', widget, data),
-    })
-    use_ssl = data.request.get('SERVER_URL', '').startswith('https://')
-    error = None
-    if data.errors:
-        error = data.errors[0]
+    recaptcha_attrs = {
+        'id': cssid(widget, 'recaptcha'),
+        'class': ' '.join([cssclasses(widget, data)]),
+    }
+    data_attrs = ['theme', 'lang', 'public_key']
+    recaptcha_attrs.update(data_attrs_helper(widget, data, data_attrs))
+    recaptcha = data.tag('div', ' ', **recaptcha_attrs)
     public_key = attr_value('public_key', widget, data)
-    return options + displayhtml(public_key, use_ssl=use_ssl, error=error)
+    return recaptcha + NO_SCRIPT_TEMPLATE.format(public_key=public_key)
 
 
 def recaptcha_display_renderer(widget, data):
-    return  ''
+    pass
 
 
 factory.register(
@@ -87,6 +95,12 @@ factory.doc['blueprint']['recaptcha'] = \
 """Add-on blueprint
 `yafowil.widget.recaptcha <http://github.com/bluedynamics/yafowil.widget.recaptcha/>`_
 """
+
+factory.defaults['recaptcha.class'] = 'recaptcha'
+
+factory.defaults['recaptcha.error_class'] = 'error'
+
+factory.defaults['recaptcha.message_class'] = 'errormessage'
 
 factory.defaults['recaptcha.public_key'] = ''
 factory.doc['props']['recaptcha.public_key'] = """\
