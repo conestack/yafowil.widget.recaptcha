@@ -1,5 +1,17 @@
 from node.utils import UNSET
 from yafowil.common import generic_required_extractor
+from yafowil.base import (
+    factory,
+    fetch_value,
+)
+from yafowil.utils import (
+    cssid,
+    cssclasses,
+    css_managed_props,
+    managedprops,
+    attr_value,
+    data_attrs_helper,
+)
 
 
 def recaptcha_extractor(widget, data):
@@ -8,11 +20,11 @@ def recaptcha_extractor(widget, data):
 
 @managedprops(*css_managed_props)
 def recaptcha_edit_renderer(widget, data):
-    return 
+    return  ''
 
 
 def recaptcha_display_renderer(widget, data):
-    pass
+    return  ''
 
 
 factory.register(

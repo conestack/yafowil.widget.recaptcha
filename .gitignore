@@ -1,0 +1,4 @@
+*.pyc
+*.pyo
+/src/yafowil.widget.recaptcha.egg-info/
+

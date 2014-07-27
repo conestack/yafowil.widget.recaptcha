@@ -6,4 +6,5 @@ Import requirements::
 Render map widget with defaults::
 
     >>> widget = factory('recaptcha', 'recaptcha')
-    >> pxml(widget())
+    >>> widget()
+    ''

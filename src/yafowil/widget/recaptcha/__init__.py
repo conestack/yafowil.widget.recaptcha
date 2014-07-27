@@ -1,1 +1,2 @@
-#
+def register():
+    import widget
