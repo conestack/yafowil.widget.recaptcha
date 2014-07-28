@@ -45,8 +45,7 @@ NO_SCRIPT_TEMPLATE = """
    <br />
    <textarea name="recaptcha_challenge_field"
              rows="3"
-             cols="40">
-   </textarea>
+             cols="40"></textarea>
    <input type="hidden"
           name="recaptcha_response_field"
           value="manual_challenge" />
