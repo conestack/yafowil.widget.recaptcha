@@ -37,8 +37,7 @@ if (typeof(window.yafowil) == "undefined") yafowil = {};
                         elem_id,
                         {
                             theme: theme,
-                            lang: lang,
-                            callback: Recaptcha.focus_response_field
+                            lang: lang
                         }
                     );
                 });
