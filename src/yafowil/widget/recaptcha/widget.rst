@@ -18,8 +18,7 @@ Render map widget with defaults::
        <iframe src="http://www.google.com/recaptcha/api/noscript?k=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" height="300" width="500" frameborder="0">
        </iframe>
        <br/>
-       <textarea name="recaptcha_challenge_field" rows="3" cols="40">
-       </textarea>
+       <textarea name="recaptcha_challenge_field" rows="3" cols="40"/>
        <input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
     </noscript>
     </div>
