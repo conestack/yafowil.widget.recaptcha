@@ -1,0 +1,41 @@
+# 
+# SOME DESCRIPTIVE TITLE
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE 1.0\n"
+"POT-Creation-Date: 2014-07-30 12:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#. Default: We weren't able to verify the private key.
+#: ./src/yafowil/widget/recaptcha/widget.py:21
+msgid "invalid-site-private-key"
+msgstr ""
+
+#. Default: The challenge parameter of the verify script was incorrect.
+#: ./src/yafowil/widget/recaptcha/widget.py:24
+msgid "invalid-request-cookie"
+msgstr ""
+
+#. Default: The CAPTCHA solution was incorrect.
+#: ./src/yafowil/widget/recaptcha/widget.py:27
+msgid "incorrect-captcha-sol"
+msgstr ""
+
+#. Default: The solution was received after the CAPTCHA timed out.
+#: ./src/yafowil/widget/recaptcha/widget.py:30
+msgid "captcha-timeout"
+msgstr ""
+
+#. Default: Unable to contact the reCAPTCHA verify server.
+#: ./src/yafowil/widget/recaptcha/widget.py:33
+msgid "recaptcha-not-reachable"
+msgstr ""

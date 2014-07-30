@@ -1,0 +1,41 @@
+#
+# English translations for PACKAGE package
+# This file is distributed under the same license as the PACKAGE package.
+# Robert Niederreiter <rnix@squarewave.at>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE 1.0\n"
+"POT-Creation-Date: 2014-07-30 12:34+0200\n"
+"PO-Revision-Date: 2014-07-30 12:34+0200\n"
+"Last-Translator: Robert Niederreiter <rnix@squarewave.at>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Default: We weren't able to verify the private key.
+#: src/yafowil/widget/recaptcha/widget.py:21
+msgid "invalid-site-private-key"
+msgstr "invalid-site-private-key"
+
+#. Default: The challenge parameter of the verify script was incorrect.
+#: src/yafowil/widget/recaptcha/widget.py:24
+msgid "invalid-request-cookie"
+msgstr "invalid-request-cookie"
+
+#. Default: The CAPTCHA solution was incorrect.
+#: src/yafowil/widget/recaptcha/widget.py:27
+msgid "incorrect-captcha-sol"
+msgstr "incorrect-captcha-sol"
+
+#. Default: The solution was received after the CAPTCHA timed out.
+#: src/yafowil/widget/recaptcha/widget.py:30
+msgid "captcha-timeout"
+msgstr "captcha-timeout"
+
+#. Default: Unable to contact the reCAPTCHA verify server.
+#: src/yafowil/widget/recaptcha/widget.py:33
+msgid "recaptcha-not-reachable"
+msgstr "recaptcha-not-reachable"
