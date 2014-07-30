@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2014-07-30 12:34+0200\n"
+"POT-Creation-Date: 2014-07-30 16:53+0200\n"
 "PO-Revision-Date: 2014-07-30 12:34+0200\n"
 "Last-Translator: Robert Niederreiter <rnix@squarewave.at>\n"
 "Language-Team: English\n"
@@ -18,24 +18,24 @@ msgstr ""
 #. Default: We weren't able to verify the private key.
 #: src/yafowil/widget/recaptcha/widget.py:21
 msgid "invalid-site-private-key"
-msgstr "invalid-site-private-key"
+msgstr "We weren't able to verify the private key."
 
 #. Default: The challenge parameter of the verify script was incorrect.
 #: src/yafowil/widget/recaptcha/widget.py:24
 msgid "invalid-request-cookie"
-msgstr "invalid-request-cookie"
+msgstr "The challenge parameter of the verify script was incorrect."
 
 #. Default: The CAPTCHA solution was incorrect.
 #: src/yafowil/widget/recaptcha/widget.py:27
 msgid "incorrect-captcha-sol"
-msgstr "incorrect-captcha-sol"
+msgstr "The CAPTCHA solution was incorrect."
 
 #. Default: The solution was received after the CAPTCHA timed out.
 #: src/yafowil/widget/recaptcha/widget.py:30
 msgid "captcha-timeout"
-msgstr "captcha-timeout"
+msgstr "The solution was received after the CAPTCHA timed out."
 
 #. Default: Unable to contact the reCAPTCHA verify server.
 #: src/yafowil/widget/recaptcha/widget.py:33
 msgid "recaptcha-not-reachable"
-msgstr "recaptcha-not-reachable"
+msgstr "Unable to contact the reCAPTCHA verify server."
