@@ -58,9 +58,12 @@ def recaptcha_extractor(widget, data):
     challenge_field = request.get('recaptcha_challenge_field')
     response_field = request.get('recaptcha_response_field')
     private_key = attr_value('private_key', widget, data)
-    remote_addr = request.request.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]
+    environ = getattr(request.request, 'environ', None)
+    if not environ:
+        environ = request.request
+    remote_addr = environ.get('HTTP_X_FORWARDED_FOR', '').split(',')[0]
     if not remote_addr:
-        remote_addr = request.request.get('REMOTE_ADDR')
+        remote_addr = environ.get('REMOTE_ADDR')
     res = submit(challenge_field, response_field, private_key, remote_addr)
     if not res.is_valid:
         raise ExtractionError(error_messages[res.error_code])

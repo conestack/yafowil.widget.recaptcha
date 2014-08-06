@@ -24,8 +24,8 @@ reCAPTCHA widget.
 
 def recaptcha_example():
     form = factory('fieldset', name='yafowil.widget.recaptcha.recaptcha')
-    recaptcha_public_key = os.environ['recaptcha-public-key']
-    recaptcha_private_key = os.environ['recaptcha-private-key']
+    recaptcha_public_key = os.environ['recaptcha_public_key']
+    recaptcha_private_key = os.environ['recaptcha_private_key']
     form['captcha'] = factory('#field:recaptcha', props={
         'label': 'Verify',
         'public_key': recaptcha_public_key,
