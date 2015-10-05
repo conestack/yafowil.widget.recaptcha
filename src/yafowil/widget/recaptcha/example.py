@@ -1,5 +1,5 @@
-import os
 from yafowil.base import factory
+import os
 
 
 DOC_RECAPTCHA = """
