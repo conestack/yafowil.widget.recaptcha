@@ -1,11 +1,10 @@
-from node.tests import NodeTestCase
 from node.tests import patch
 from node.utils import UNSET
 from yafowil.base import ExtractionError
 from yafowil.base import factory
+from yafowil.tests import YafowilTestCase
 from yafowil.tests import fxml
 from yafowil.widget.recaptcha import widget as recaptcha_widget
-import yafowil.widget.recaptcha
 import yafowil.loader
 
 
@@ -27,7 +26,12 @@ def mock_submit(challenge_field, response_field, private_key, remote_addr):
     return recaptcha_result
 
 
-class TestRecaptchaWidget(NodeTestCase):
+class TestRecaptchaWidget(YafowilTestCase):
+
+    def setUp(self):
+        super(TestRecaptchaWidget, self).setUp()
+        from yafowil.widget.recaptcha import widget
+        reload(widget)
 
     def test_edit_renderer(self):
         # Render map widget with defaults
