@@ -4,7 +4,7 @@ yafowil.widget.recaptcha
 This is the recaptcha widget for `yafowil <http://pypi.python.org/pypi/yafowil>`_,
 based on `reCAPTCHA http://www.google.com/recaptcha/intro/index.html`_
 
-- `Documentation <http://docs.yafowil.info/en/latest/blueprints.html#recaptcha>`_
+- `Documentation <http://docs.yafowil.info/blueprints.html#recaptcha>`_
 
 - `DEMO - see it Live <http://demo.yafowil.info/++widget++yafowil.widget.recaptcha/index.html>`_
 
