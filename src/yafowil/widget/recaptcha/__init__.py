@@ -17,6 +17,6 @@ js = [{
 
 @entry_point(order=10)
 def register():
-    from yafowil.widget.recaptcha import widget
+    from yafowil.widget.recaptcha import widget  # noqa
     factory.register_theme('default', 'yafowil.widget.recaptcha',
                            resourcedir, js=js)

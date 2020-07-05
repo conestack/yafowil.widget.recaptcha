@@ -22,6 +22,7 @@ reCAPTCHA widget.
     })
 """
 
+
 def recaptcha_example():
     form = factory('fieldset', name='yafowil.widget.recaptcha.recaptcha')
     recaptcha_public_key = os.environ['recaptcha_public_key']

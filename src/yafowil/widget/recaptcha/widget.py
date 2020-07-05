@@ -89,8 +89,8 @@ factory.register(
     edit_renderers=[recaptcha_edit_renderer],
     display_renderers=[recaptcha_display_renderer])
 
-factory.doc['blueprint']['recaptcha'] = \
-"""Add-on blueprint
+factory.doc['blueprint']['recaptcha'] = """\
+Add-on blueprint
 `yafowil.widget.recaptcha <http://github.com/bluedynamics/yafowil.widget.recaptcha/>`_
 """
 

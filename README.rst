@@ -1,6 +1,3 @@
-yafowil.widget.recaptcha
-========================
-
 This is the recaptcha widget for `yafowil <http://pypi.python.org/pypi/yafowil>`_,
 based on `reCAPTCHA <http://www.google.com/recaptcha/intro/index.html>`_
 
