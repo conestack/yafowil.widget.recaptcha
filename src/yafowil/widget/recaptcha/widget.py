@@ -91,7 +91,7 @@ factory.register(
 
 factory.doc['blueprint']['recaptcha'] = """\
 Add-on blueprint
-`yafowil.widget.recaptcha <http://github.com/bluedynamics/yafowil.widget.recaptcha/>`_
+`yafowil.widget.recaptcha <http://github.com/conestack/yafowil.widget.recaptcha/>`_
 """
 
 factory.defaults['recaptcha.class'] = 'recaptcha'
